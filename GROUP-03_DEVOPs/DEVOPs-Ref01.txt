@@ -1,0 +1,3 @@
+As for 2021, one of the leading technological approaches practiced for software development is DevOps methodology, which is used in every third project (35.9%), says Statista.
+
+But, in practice, it’s more efficient to review all the options available on the market and define which of the software development methodologies can fit your program best.

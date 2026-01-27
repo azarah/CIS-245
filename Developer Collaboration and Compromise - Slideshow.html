@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Developer Collaboration and Compromise</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/black.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #050509;
+            --bg-panel: #0d0d16;
+            --accent: #6366f1; /* indigo / electric */
+            --accent-soft: rgba(99, 102, 241, 0.15);
+            --text-main: #f5f5ff;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1e1b4b 0, #020617 40%, #000 100%);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .reveal {
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .reveal .viewport {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reveal .slides {
+            text-align: center;
+        }
+
+        .reveal .slides section {
+            text-align: left;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            text-align: center;
+            letter-spacing: 0.03em;
+            font-weight: 600;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .reveal h1 {
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal h2 {
+            font-weight: 600;
+        }
+
+        .reveal h3 {
+            font-weight: 500;
+        }
+
+        .reveal .slides section.title-slide {
+            text-align: center;
+            align-items: center;
+        }
+
+        .reveal ul,
+        .reveal ol {
+            margin-left: 1em;
+            list-style: none;
+        }
+
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.6em;
+        }
+
+        .reveal ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.7em;
+            line-height: 1.8;
+        }
+
+        .reveal ol li {
+            position: relative;
+            padding-left: 2em;
+            margin-bottom: 0.6em;
+            counter-increment: list-counter;
+        }
+
+        .reveal ol {
+            counter-reset: list-counter;
+            list-style: none;
+        }
+
+        .reveal ol li::before {
+            content: counter(list-counter);
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+            width: 1.5em;
+            text-align: right;
+        }
+
+        .reveal p {
+            color: var(--text-main);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .reveal strong {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .reveal small,
+        .reveal .controls,
+        .reveal .progress span {
+            color: var(--text-muted);
+        }
+
+        .reveal .controls .navigate-left,
+        .reveal .controls .navigate-right,
+        .reveal .controls .navigate-up,
+        .reveal .controls .navigate-down {
+            color: var(--accent);
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+        }
+
+        .reveal .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .reveal .benefits {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(45, 212, 191, 0.02));
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-top: 14px;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+
+        .reveal .strategy-box {
+            background: radial-gradient(circle at top left, var(--accent-soft), transparent 65%);
+            padding: 20px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            margin: 12px 0;
+        }
+
+        .reveal .strategy-box p {
+            margin: 4px 0;
+        }
+
+        /* Sleek pagination (slide number) */
+        .reveal .slide-number {
+            background: rgba(15, 23, 42, 0.88);
+            color: var(--text-muted);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 0.6em;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            backdrop-filter: blur(8px);
+            bottom: 18px;
+            right: 26px;
+            font-weight: 500;
+        }
+
+        .reveal .slide-number span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Ensure reveal container is properly sized */
+        .reveal .reveal-viewport {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Subtle framing for slides */
+        .reveal .slides > section,
+        .reveal .slides > section > section {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85));
+            border-radius: 12px;
+            padding: 32px 40px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            width: 90%;
+            max-width: 960px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section class="title-slide">
+                <h1>How Developers Collaborate, Critique, and Find Compromise</h1>
+                <p style="margin-top: 50px; font-size: 0.8em; color: #666;">CIS 245</p>
+            </section>
+
+            <!-- Introduction -->
+            <section>
+                <h2>Introduction</h2>
+                <p>When multiple developers work on the same project, effective collaboration is essential for creating a cohesive final product.</p>
+                <p class="fragment">Developers use established practices and tools to:</p>
+                <ul class="fragment">
+                    <li>Present their work</li>
+                    <li>Receive feedback</li>
+                    <li>Reach compromises that benefit the entire project</li>
+                </ul>
+            </section>
+
+            <!-- Methods Overview -->
+            <section>
+                <h2>Methods of Presentation and Critique</h2>
+                <ol>
+                    <li>Code Reviews (Pull Requests)</li>
+                    <li>Pair Programming</li>
+                    <li>Daily Stand-ups and Team Meetings</li>
+                    <li>Technical Design Reviews</li>
+                    <li>Retrospectives</li>
+                </ol>
+            </section>
+
+            <!-- Code Reviews -->
+            <section>
+                <h2>1. Code Reviews</h2>
+                <h3>(Pull Requests/Merge Requests)</h3>
+                <p><strong>What it is:</strong> Before code is merged, developers submit changes for review.</p>
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li>Developer creates a branch with changes</li>
+                    <li>Submits PR/MR with description</li>
+                    <li>Team reviews, comments, suggests improvements</li>
+                    <li>Code approved, revised, or discussed until consensus</li>
+                </ul>
+                <div class="benefits fragment">
+                    <strong>Benefits:</strong> Catches bugs, shares knowledge, maintains quality, provides learning
+                </div>
+            </section>
+
+            <!-- Pair Programming -->
+            <section>
+                <h2>2. Pair Programming</h2>
+                <p><strong>What it is:</strong> Two developers work together on the same code simultaneously.</p>
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li><strong>Driver:</strong> Writes code</li>
+                    <li><strong>Navigator:</strong> Reviews and suggests in real-time</li>
+                    <li>Roles switch frequently</li>
+                    <li>Continuous discussion and collaboration</li>
+                </ul>
+                <div class="benefits fragment">
+                    <strong>Benefits:</strong> Immediate feedback, knowledge sharing, fewer bugs, faster problem-solving
+                </div>
+            </section>
+
+            <!-- Stand-ups -->
+            <section>
+                <h2>3. Daily Stand-ups and Team Meetings</h2>
+                <p><strong>What it is:</strong> Regular brief meetings for progress, challenges, and plans.</p>
+                <p><strong>Three Questions:</strong></p>
+                <ol>
+                    <li>What did I do?</li>
+                    <li>What will I do?</li>
+                    <li>What obstacles am I facing?</li>
+                </ol>
+                <div class="benefits fragment">
+                    <strong>Benefits:</strong> Keeps team informed, identifies conflicts early, facilitates coordination
+                </div>
+            </section>
+
+            <!-- Technical Design Reviews -->
+            <section>
+                <h2>4. Technical Design Reviews</h2>
+                <p><strong>What it is:</strong> Present proposed approach before implementing major features.</p>
+                <p><strong>Process:</strong></p>
+                <ol>
+                    <li>Create design document or presentation</li>
+                    <li>Team reviews approach and architecture</li>
+                    <li>Gather and incorporate feedback</li>
+                    <li>Approve final design before coding</li>
+                </ol>
+                <div class="benefits fragment">
+                    <strong>Benefits:</strong> Prevents costly mistakes, ensures alignment, incorporates perspectives
+                </div>
+            </section>
+
+            <!-- Retrospectives -->
+            <section>
+                <h2>5. Retrospectives</h2>
+                <p><strong>What it is:</strong> Regular reflection on what went well, what didn't, and how to improve.</p>
+                <p><strong>Activities:</strong></p>
+                <ul>
+                    <li>Discuss recent work and processes</li>
+                    <li>Identify successes and improvements</li>
+                    <li>Brainstorm solutions</li>
+                    <li>Commit to new approaches</li>
+                </ul>
+                <div class="benefits fragment">
+                    <strong>Benefits:</strong> Continuous improvement, addresses issues, strengthens communication, builds trust
+                </div>
+            </section>
+
+            <!-- Tools Section -->
+            <section>
+                <h2>Tools That Facilitate Collaboration</h2>
+            </section>
+
+            <section>
+                <h3>Version Control Systems</h3>
+                <p><strong>Git, SVN, etc.</strong></p>
+                <ul>
+                    <li>Track changes and who made them</li>
+                    <li>Enable branching and merging</li>
+                    <li>Provide history of modifications</li>
+                    <li>Support code review workflows</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Communication Platforms</h3>
+                <p><strong>Slack, Microsoft Teams, Discord</strong></p>
+                <ul>
+                    <li>Real-time messaging for quick questions</li>
+                    <li>Channels for different topics</li>
+                    <li>Integration with development tools</li>
+                    <li>Asynchronous communication</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Project Management Tools</h3>
+                <p><strong>Jira, Trello, GitHub Projects</strong></p>
+                <ul>
+                    <li>Track tasks and progress</li>
+                    <li>Assign work to team members</li>
+                    <li>Visualize project status</li>
+                    <li>Manage deadlines and priorities</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Code Review Platforms</h3>
+                <p><strong>GitHub, GitLab, Bitbucket</strong></p>
+                <ul>
+                    <li>Interface for reviewing code changes</li>
+                    <li>Comment threads on specific lines</li>
+                    <li>Approval workflows</li>
+                    <li>Integration with CI/CD pipelines</li>
+                </ul>
+            </section>
+
+            <!-- Finding Compromise -->
+            <section>
+                <h2>Finding Compromise: Strategies and Approaches</h2>
+            </section>
+
+            <section>
+                <h3>1. Focus on Project Goals</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Refocus discussion on shared project objectives when disagreements arise.</p>
+                    <p><strong>Example:</strong> Discuss which framework best serves requirements, timeline, and team expertise.</p>
+                    <p><strong>Why it works:</strong> Removes personal preferences, keeps decisions objective.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>2. Data-Driven Decisions</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Use metrics, benchmarks, and evidence to support choices.</p>
+                    <p><strong>Example:</strong> Compare performance, maintainability, or community support using concrete data.</p>
+                    <p><strong>Why it works:</strong> Reduces subjective arguments, provides clear justification.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>3. Prototype and Test</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Create small prototypes of different approaches and test them.</p>
+                    <p><strong>Example:</strong> Build minimal versions of competing solutions and evaluate in practice.</p>
+                    <p><strong>Why it works:</strong> Real-world testing reveals the best solution clearly.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>4. Defer to Domain Expertise</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Recognize specialized knowledge and give appropriate weight.</p>
+                    <p><strong>Example:</strong> Security expert leads security-related decisions.</p>
+                    <p><strong>Why it works:</strong> Leverages team strengths, builds trust.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>5. Time-Boxed Discussions</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Set time limits, then make a decision even without consensus.</p>
+                    <p><strong>Example:</strong> "We'll discuss for 30 minutes, then tech lead decides."</p>
+                    <p><strong>Why it works:</strong> Prevents endless debates, keeps project moving.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>6. Incremental Implementation</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Start minimal, improve later rather than perfecting upfront.</p>
+                    <p><strong>Example:</strong> Implement basic feature first, iterate based on feedback.</p>
+                    <p><strong>Why it works:</strong> Allows learning from real usage.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>7. Code Ownership</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Assign clear ownership with final say on areas.</p>
+                    <p><strong>Example:</strong> Developer owns authentication module and has final say.</p>
+                    <p><strong>Why it works:</strong> Prevents conflicts, establishes boundaries.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>8. Consensus Building</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Actively seek input from all, work toward acceptable solutions.</p>
+                    <p><strong>Example:</strong> "Let's hear everyone's concerns and find solutions."</p>
+                    <p><strong>Why it works:</strong> Ensures buy-in, reduces resistance.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>9. Document Decisions</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Record why decisions were made, alternatives considered, who was involved.</p>
+                    <p><strong>Example:</strong> Maintain Architecture Decision Record (ADR) document.</p>
+                    <p><strong>Why it works:</strong> Provides context, prevents revisiting settled issues.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>10. Respectful Communication</h3>
+                <div class="strategy-box">
+                    <p><strong>Approach:</strong> Critique code and ideas, not people. Focus on "what" and "why."</p>
+                    <p><strong>Example:</strong> "This approach might have performance issues" vs. "Your code is slow."</p>
+                    <p><strong>Why it works:</strong> Maintains positive dynamics, encourages open discussion.</p>
+                </div>
+            </section>
+
+            <!-- Common Challenges -->
+            <section>
+                <h2>Common Challenges and Solutions</h2>
+            </section>
+
+            <section>
+                <h3>Conflicting Technical Opinions</h3>
+                <p><strong>Solution:</strong> Use objective criteria (performance, maintainability, team skills). Defer to maintainer if still conflicted.</p>
+            </section>
+
+            <section>
+                <h3>Different Coding Styles</h3>
+                <p><strong>Solution:</strong> Establish coding standards. Use automated tools (linters, formatters) to enforce consistency.</p>
+            </section>
+
+            <section>
+                <h3>Uneven Workload</h3>
+                <p><strong>Solution:</strong> Regular check-ins and transparent task assignment identify and address imbalances.</p>
+            </section>
+
+            <section>
+                <h3>Communication Breakdowns</h3>
+                <p><strong>Solution:</strong> Multiple channels (async for updates, sync for discussions). Document decisions. Encourage questions.</p>
+            </section>
+
+            <section>
+                <h3>Personality Conflicts</h3>
+                <p><strong>Solution:</strong> Focus on code and processes, not personalities. Use structured processes (code reviews) that depersonalize feedback.</p>
+            </section>
+
+            <!-- Best Practices -->
+            <section>
+                <h2>Best Practices for Effective Collaboration</h2>
+            </section>
+
+            <section>
+                <ol>
+                    <li><strong>Be Open to Feedback:</strong> View critiques as opportunities to improve</li>
+                    <li><strong>Give Constructive Feedback:</strong> Explain why and suggest alternatives</li>
+                    <li><strong>Communicate Early and Often:</strong> Don't wait until problems are large</li>
+                    <li><strong>Document Your Work:</strong> Make it easy for others to understand</li>
+                </ol>
+            </section>
+
+            <section>
+                <ol start="5">
+                    <li><strong>Be Flexible:</strong> Willing to change when better solutions emerge</li>
+                    <li><strong>Respect Deadlines:</strong> Balance perfectionism with timelines</li>
+                    <li><strong>Learn Continuously:</strong> Use collaboration as learning opportunity</li>
+                    <li><strong>Celebrate Successes:</strong> Acknowledge good work and achievements</li>
+                </ol>
+            </section>
+
+            <!-- Conclusion -->
+            <section>
+                <h2>Conclusion</h2>
+                <p>Developers collaborate effectively through structured processes:</p>
+                <ul>
+                    <li>Code reviews</li>
+                    <li>Pair programming</li>
+                    <li>Regular meetings</li>
+                </ul>
+                <p class="fragment">They find compromise by:</p>
+                <ul class="fragment">
+                    <li>Focusing on shared goals</li>
+                    <li>Using data to make decisions</li>
+                    <li>Respecting expertise</li>
+                    <li>Maintaining respectful communication</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Key Takeaway</h2>
+                <p style="font-size: 1.2em; text-align: center; margin-top: 100px;">
+                    Successful collaboration requires both <span class="highlight">technical skills</span> and <span class="highlight">interpersonal skills</span>
+                </p>
+                <p style="text-align: center; margin-top: 50px;">
+                    The ability to communicate clearly, give and receive feedback gracefully, and work toward solutions that serve both the project and the team.
+                </p>
+            </section>
+
+            <!-- Thank You -->
+            <section class="title-slide">
+                <h1>Thank You</h1>
+                <p style="margin-top: 50px;">Questions?</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            slideNumber: 'c / t' // quaint pagination: current / total
+        });
+    </script>
+</body>
+</html>
+

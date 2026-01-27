@@ -1,0 +1,7 @@
+10 Main Software Development Methodologies
+Developers are spoilt for choices from the various software development methodologies available. Most of the methodologies fall can be categorized as either a waterfall, iterative or continuous model.
+
+A Waterfall methodology follows a fixed sequence in implementation. Stages of development are defined in a rigid, sequential manner. This model was highly popular during the early days of programming due to the certainty in project scope. However, the rigidity of its structure also contributes to a high failure rate for many projects.
+The Iterative model offers an alternative for software development that’s less focused on rigid documentation but provides room for constant revisions. It uses multiple sprints to quickly build and test ideas to ensure they are relevant to users. As such, problems get fixed early on, and the team stays within the project’s goals. Agile and Scrum are two of the most popular iterative software development methodologies.
+The Continuous model is inspired by the Toyota Production System. It is about minimizing interruption or ensuring the flow between different phases of development. The goal of the continuous software development approach is to avoid wastage and improve the efficiency of the various phases.
+Here are 10 of the most popular software development methodologies favored by modern developers.
