@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Why DevOps? A Strategic Choice for Modern Software Development</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/black.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #050509;
+            --bg-panel: #0d0d16;
+            --accent: #6366f1;
+            --accent-soft: rgba(99, 102, 241, 0.15);
+            --success: #10b981;
+            --text-main: #f5f5ff;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1e1b4b 0, #020617 40%, #000 100%);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .reveal {
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .reveal .slides section {
+            text-align: center;
+            padding: 15px 30px;
+            box-sizing: border-box;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 100vh;
+        }
+        
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .reveal .viewport {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .reveal .slides section > * {
+            flex-shrink: 0;
+        }
+        
+        .reveal .slides section {
+            width: 100%;
+        }
+        
+        /* Ensure content wraps and fits */
+        .reveal .slides section * {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            text-align: center;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 0.8em;
+            margin-top: 0;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.2em;
+            margin-top: 0;
+        }
+
+        .reveal h2 {
+            font-size: 1.3em;
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.15em;
+            margin-bottom: 0.4em;
+            margin-top: 0;
+        }
+
+        .reveal h3 {
+            font-size: 1em;
+            color: var(--text-main);
+            text-align: center;
+            margin-bottom: 0.3em;
+            margin-top: 0;
+        }
+
+        .reveal p {
+            font-size: 0.75em;
+            line-height: 1.3;
+            color: var(--text-main);
+            text-align: center;
+            margin: 0.2em 0;
+        }
+
+        .reveal ul {
+            font-size: 0.7em;
+            line-height: 1.3;
+            text-align: left;
+            display: inline-block;
+            max-width: 92%;
+            margin: 0.2em auto;
+            padding-left: 1em;
+        }
+
+        .reveal ol {
+            font-size: 0.7em;
+            line-height: 1.3;
+            text-align: left;
+            display: inline-block;
+            max-width: 92%;
+            margin: 0.2em auto;
+            padding-left: 1em;
+        }
+
+        .reveal li {
+            margin-bottom: 0.2em;
+            color: var(--text-main);
+        }
+
+        .highlight-box {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 0.6em 0.8em;
+            margin: 0.3em auto;
+            border-radius: 8px;
+            max-width: 95%;
+            text-align: left;
+        }
+        
+        .highlight-box h3 {
+            text-align: center;
+            margin-bottom: 0.3em;
+            font-size: 0.95em;
+            margin-top: 0;
+        }
+        
+        .highlight-box p {
+            text-align: left;
+            font-size: 0.7em;
+            margin: 0.2em 0;
+        }
+        
+        .highlight-box ul {
+            margin: 0.2em 0;
+            font-size: 0.7em;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border: 2px solid var(--accent);
+            padding: 0.5em;
+            margin: 0.2em;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.65em;
+            color: var(--text-muted);
+            margin-top: 0.15em;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5em;
+            margin: 0.2em auto;
+            max-width: 96%;
+        }
+
+        .benefit-item {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.5em;
+            border-radius: 6px;
+            margin: 0.2em 0;
+            border-left: 2px solid var(--accent);
+            text-align: left;
+        }
+
+        .benefit-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.2em;
+            font-size: 0.8em;
+            text-align: left;
+            margin-top: 0;
+        }
+        
+        .benefit-item p {
+            text-align: left;
+            font-size: 0.7em;
+            margin: 0.15em 0;
+        }
+
+        .cycle-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0.3em auto;
+            flex-wrap: wrap;
+            max-width: 96%;
+        }
+
+        .cycle-step {
+            background: var(--accent-soft);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 0.15em;
+            font-size: 0.65em;
+        }
+
+        .arrow {
+            color: var(--accent);
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+            border: 2px solid var(--success);
+            padding: 0.5em 0.8em;
+            border-radius: 10px;
+            margin: 0.3em auto;
+            max-width: 95%;
+            text-align: left;
+        }
+
+        .case-study h4 {
+            color: var(--success);
+            font-size: 0.85em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .case-study p {
+            text-align: left;
+            font-size: 0.7em;
+            margin: 0.2em 0;
+        }
+        
+        .case-study ul {
+            text-align: left;
+            margin: 0.2em 0;
+            font-size: 0.7em;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 0.6em;
+            border-radius: 12px;
+            margin: 0.3em auto;
+            max-width: 95%;
+        }
+
+        .cta-section h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 0.3em;
+            font-size: 0.95em;
+            margin-top: 0;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 0.8em;
+            margin: 0.2em 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8em;
+            margin-top: -0.15em;
+            margin-bottom: 0.3em;
+        }
+
+        .team-info {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.7em;
+            margin-top: 0.3em;
+        }
+        
+        .team-info p {
+            margin: 0.15em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>Why DevOps?</h1>
+                <p class="subtitle">A Strategic Choice for Modern Software Development</p>
+                <div class="team-info">
+                    <p>Group 03: DevOps</p>
+                    <p>Charletta • Joseph Hernandez • Eder Castillo</p>
+                </div>
+            </section>
+
+            <!-- Slide 2: The Problem -->
+            <section>
+                <h2>The Challenge</h2>
+                <div class="highlight-box">
+                    <h3>Traditional Development vs. Modern Demands</h3>
+                    <ul>
+                        <li><strong>Silos:</strong> Development and Operations teams work separately</li>
+                        <li><strong>Slow Releases:</strong> Weeks or months between deployments</li>
+                        <li><strong>Manual Processes:</strong> Error-prone, time-consuming handoffs</li>
+                        <li><strong>Reactive:</strong> Problems discovered in production</li>
+                        <li><strong>Rigid:</strong> Difficult to adapt to changing requirements</li>
+                    </ul>
+                </div>
+                <p style="text-align: center; margin-top: 0.5em; color: var(--accent); font-size: 0.85em; font-weight: 600;">
+                    There's a better way...
+                </p>
+            </section>
+
+            <!-- Slide 3: What is DevOps -->
+            <section>
+                <h2>What is DevOps?</h2>
+                <div class="highlight-box">
+                    <p style="font-size: 0.95em; text-align: center; margin-bottom: 0.5em;">
+                        <strong>DevOps = Development + Operations</strong>
+                    </p>
+                    <p style="font-size: 0.75em;">
+                        A cultural philosophy and set of practices that combines software development (Dev) 
+                        and IT operations (Ops) into a single, integrated approach. It's about breaking down 
+                        silos, automating processes, and delivering software faster and more reliably.
+                    </p>
+                </div>
+                <div class="two-column" style="margin-top: 0.5em;">
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 0.9em; color: var(--accent);">Not Just Tools</h3>
+                        <p style="text-align: center; font-size: 0.7em;">It's a fundamental shift in culture, processes, and technology</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 0.9em; color: var(--accent);">Continuous Model</h3>
+                        <p style="text-align: center; font-size: 0.7em;">Inspired by Toyota Production System - minimize waste, maximize flow</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: How It Works -->
+            <section>
+                <h2>How DevOps Works</h2>
+                <h3>The Continuous Cycle</h3>
+                <div class="cycle-diagram">
+                    <div class="cycle-step">Plan</div>
+                    <span class="arrow">→</span>
+                    <div class="cycle-step">Code</div>
+                    <span class="arrow">→</span>
+                    <div class="cycle-step">Build</div>
+                    <span class="arrow">→</span>
+                    <div class="cycle-step">Test</div>
+                    <span class="arrow">→</span>
+                    <div class="cycle-step">Deploy</div>
+                    <span class="arrow">→</span>
+                    <div class="cycle-step">Monitor</div>
+                </div>
+                <div style="margin-top: 0.5em; text-align: center;">
+                    <h3 style="font-size: 1em;">Core Practices:</h3>
+                    <ul style="margin: 0.5em auto; display: inline-block;">
+                        <li><strong>Continuous Integration (CI):</strong> Automated builds and tests</li>
+                        <li><strong>Continuous Deployment (CD):</strong> Automated releases to production</li>
+                        <li><strong>Infrastructure as Code:</strong> Version-controlled, automated infrastructure</li>
+                        <li><strong>Automation:</strong> Eliminate manual, repetitive tasks</li>
+                        <li><strong>Monitoring:</strong> Real-time feedback and proactive issue detection</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 5: Key Benefits -->
+            <section>
+                <h2>Why DevOps? The Benefits</h2>
+                <div class="two-column" style="max-width: 95%; margin: 0 auto;">
+                    <div class="benefit-item">
+                        <h4>⚡ Faster Time to Market</h4>
+                        <p>Deploy features in hours, not weeks. Respond quickly to market demands.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🤝 Better Collaboration</h4>
+                        <p>Break down silos. Teams work together with shared responsibility.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>✅ Higher Quality</h4>
+                        <p>Automated testing catches bugs early. Continuous integration ensures quality.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🔄 Increased Reliability</h4>
+                        <p>Automated deployments reduce errors. Consistent, repeatable processes.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>📈 Better Scalability</h4>
+                        <p>Easily scale infrastructure and applications. Cloud-native approaches.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>💰 Cost Efficiency</h4>
+                        <p>Reduce manual work. Prevent costly failures. Optimize resources.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Impact Stats -->
+            <section>
+                <h2>The Impact</h2>
+                <div class="two-column" style="max-width: 95%; margin: 0 auto;">
+                    <div class="stat-box">
+                        <span class="stat-number">10x</span>
+                        <span class="stat-label">Faster Deployment Frequency</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">200x</span>
+                        <span class="stat-label">Faster Lead Time</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">24x</span>
+                        <span class="stat-label">Faster Recovery Time</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">3x</span>
+                        <span class="stat-label">Lower Change Failure Rate</span>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 0.5em;">
+                    <p style="text-align: center; font-size: 0.75em;">
+                        <strong>Organizations using DevOps deploy 200x more frequently and recover 24x faster</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 7: Real-World Success -->
+            <section>
+                <h2>Real-World Success: AWS DevSecOps</h2>
+                <div class="case-study">
+                    <h4>Amazon Web Services</h4>
+                    <p><strong>Challenge:</strong> Manage millions of customer workloads with enterprise-scale infrastructure</p>
+                    <p><strong>Solution:</strong> DevOps practices with integrated security (DevSecOps)</p>
+                    <div style="margin-top: 0.5em;">
+                        <h4 style="color: var(--success); font-size: 0.85em; text-align: center;">Key Success Factors:</h4>
+                        <ul style="text-align: left; margin: 0.5em 0;">
+                            <li>Cloud-native infrastructure enabling rapid scaling</li>
+                            <li>Automated CI/CD pipelines with integrated security</li>
+                            <li>Infrastructure as Code for consistent deployments</li>
+                            <li>Continuous monitoring and automated incident response</li>
+                            <li>Cultural transformation fostering collaboration</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 0.4em; font-style: italic; color: var(--text-muted); font-size: 0.7em;">
+                        AWS demonstrates DevOps can scale to enterprise levels while maintaining security and reliability.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 8: When It Works Best -->
+            <section>
+                <h2>Is DevOps Right for Your Project?</h2>
+                <div class="highlight-box">
+                    <h3 style="color: var(--success);">DevOps Works Best When:</h3>
+                    <ul>
+                        <li>✅ You need frequent releases (daily, weekly, or multiple times per day)</li>
+                        <li>✅ You're using cloud platforms (AWS, Azure, GCP)</li>
+                        <li>✅ You're practicing Agile methodologies</li>
+                        <li>✅ You need to respond quickly to market changes</li>
+                        <li>✅ You're building microservices-based applications</li>
+                        <li>✅ Leadership supports collaboration and innovation</li>
+                        <li>✅ You're willing to invest in automation tools</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 0.5em; padding: 0.6em; background: rgba(255, 193, 7, 0.1); border-left: 3px solid #ffc107; border-radius: 8px; max-width: 95%; margin-left: auto; margin-right: auto; text-align: left;">
+                    <p style="text-align: left; font-size: 0.7em; margin: 0;"><strong>Note:</strong> DevOps may not be ideal for small projects with infrequent releases or organizations with strict regulatory requirements needing extensive approval processes.</p>
+                </div>
+            </section>
+
+            <!-- Slide 9: Addressing Concerns -->
+            <section>
+                <h2>Addressing Common Concerns</h2>
+                <div class="two-column" style="max-width: 95%; margin: 0 auto;">
+                    <div class="benefit-item">
+                        <h4>💸 "It's Too Expensive"</h4>
+                        <p><strong>Solution:</strong> Start small, use open-source tools, phased implementation. ROI typically exceeds costs through reduced failures and faster delivery.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🔒 "Security Concerns"</h4>
+                        <p><strong>Solution:</strong> DevSecOps integrates security throughout. Automated security scanning, compliance checks, and least-privilege principles.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>📚 "Lack of Standards"</h4>
+                        <p><strong>Solution:</strong> Create internal standards, document processes, provide training. AWS Well-Architected Framework provides guidance.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🔄 "Cultural Resistance"</h4>
+                        <p><strong>Solution:</strong> Secure leadership buy-in, implement gradually, celebrate wins, provide training and mentorship.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: The Bottom Line -->
+            <section>
+                <h2>The Bottom Line</h2>
+                <div class="cta-section">
+                    <h3>DevOps is Not Just a Trend</h3>
+                    <p>It's a proven methodology that enables organizations to:</p>
+                </div>
+                <div style="margin-top: 0.5em;">
+                    <div class="two-column">
+                        <div style="text-align: center;">
+                            <h3 style="color: var(--success); font-size: 0.95em;">✅ Deliver Faster</h3>
+                            <p style="text-align: center; font-size: 0.7em;">Get features to market in hours instead of weeks</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h3 style="color: var(--success); font-size: 0.95em;">✅ Improve Quality</h3>
+                            <p style="text-align: center; font-size: 0.7em;">Catch bugs early, reduce production failures</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h3 style="color: var(--success); font-size: 0.95em;">✅ Reduce Costs</h3>
+                            <p style="text-align: center; font-size: 0.7em;">Automate manual work, optimize resources</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h3 style="color: var(--success); font-size: 0.95em;">✅ Stay Competitive</h3>
+                            <p style="text-align: center; font-size: 0.7em;">Respond quickly to market changes and customer needs</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Next Steps -->
+            <section>
+                <h2>Ready to Get Started?</h2>
+                <div class="highlight-box">
+                    <h3>Recommended Approach:</h3>
+                    <ol style="font-size: 0.7em; line-height: 1.3;">
+                        <li><strong>Assess Readiness:</strong> Evaluate your organization's culture, tools, and processes</li>
+                        <li><strong>Start Small:</strong> Begin with a pilot project or team</li>
+                        <li><strong>Secure Leadership Support:</strong> Get buy-in from top management</li>
+                        <li><strong>Invest in Training:</strong> Provide comprehensive training for your teams</li>
+                        <li><strong>Choose the Right Tools:</strong> Select integrated, interoperable tools</li>
+                        <li><strong>Measure Progress:</strong> Track metrics and continuously improve</li>
+                    </ol>
+                </div>
+                <div class="case-study" style="margin-top: 0.5em;">
+                    <h4>Learning Resources</h4>
+                    <p>📚 AWS Well-Architected DevOps Guidance</p>
+                    <p>📚 Introduction to DevOps on AWS Whitepaper</p>
+                    <p>📚 Comprehensive DevOps documentation and best practices</p>
+                </div>
+            </section>
+
+            <!-- Slide 12: Final Call to Action -->
+            <section>
+                <h1 style="font-size: 1.8em;">Make the Move</h1>
+                <div class="cta-section" style="margin-top: 0.3em;">
+                    <h3 style="font-size: 0.95em;">DevOps: Your Path to Faster, Better, More Reliable Software Delivery</h3>
+                    <p style="font-size: 0.8em; margin-top: 0.3em;">
+                        The question isn't whether DevOps works—<br>
+                        it's whether you can afford not to adopt it.
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 0.5em; color: var(--text-muted);">
+                    <p style="font-size: 0.75em;">Questions?</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            touch: true,
+            loop: false,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade'
+        });
+    </script>
+</body>
+</html>
+
